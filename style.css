@@ -11,3 +11,11 @@ body {
     justify-content: center;
     background: #0f0f0f;
 }
+
+.calculator {
+    width: 280px;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: #161616;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
