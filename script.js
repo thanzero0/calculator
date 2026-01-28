@@ -16,3 +16,7 @@ clearBtn.addEventListener("click", () => {
     expression = "";
     display.value = "";
 });
+
+equalBtn.addEventListener("click", () => {
+
+});
