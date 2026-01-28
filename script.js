@@ -18,5 +18,11 @@ clearBtn.addEventListener("click", () => {
 });
 
 equalBtn.addEventListener("click", () => {
-
+    try {
+        expression = eval(expression).toString();
+        display.value = expression;
+    } catch {
+        display.value = "Error";
+        expression = "";
+    }
 });
