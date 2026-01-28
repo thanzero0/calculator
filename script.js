@@ -6,5 +6,8 @@ const equalBtn = Document.getElementById("equal");
 let expression = "";
 
 buttons.forEach((button) => {
-    
+    button.addEventListener("click", () => {
+        expression += button.dataset.value;
+        display.value = expression;
+    })
 });
