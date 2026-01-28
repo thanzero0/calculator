@@ -63,3 +63,12 @@ button:active {
 #clear:hover {
     background: #552525;
 }
+
+.equal {
+    grid-column: span 4;
+    background: #2563eb;
+}
+
+.equal:hover {
+    background: 1e4fd8;
+}
