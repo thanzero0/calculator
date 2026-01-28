@@ -13,5 +13,6 @@ buttons.forEach((button) => {
 });
 
 clearBtn.addEventListener("click", () => {
-
+    expression = "";
+    display.value = "";
 });
