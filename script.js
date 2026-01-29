@@ -28,5 +28,11 @@ buttons.addEventListener("click", function (e) {
             Number(angka2),
             operator
         );
+
+        display.value = hasil;
+
+        angka1 = hasil.toString();
+        angka2 = "";
+        return;
     }
 })
