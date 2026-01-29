@@ -1,28 +1,30 @@
 const display = document.getElementById("display");
-const buttons = document.querySelectorAll("button[data-value]");
-const clearBtn = document.getElementById("clear");
-const equalBtn = Document.getElementById("equal");
+const buttons = document.querySelector(".buttons");
 
 let expression = "";
 
-buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        expression += button.dataset.value;
-        display.value = expression;
-    })
-});
+buttons.addEventListener("click", (e) => {
+    const btn = e.target;
 
-clearBtn.addEventListener("click", () => {
-    expression = "";
-    display.value = "";
-});
+    if (!btn.dataset.value && btn.id !== "equal" && btn.id !== "clear") return;
 
-equalBtn.addEventListener("click", () => {
-    try {
+    if (btn.id === "clear") {
+        expression = "";
+        display.value = "";
+        return;
+    }
+
+    if (btn.id === "equal") {
+        try {
         expression = eval(expression).toString();
         display.value = expression;
     } catch {
         display.value = "Error";
         expression = "";
     }
+    return;
+}
+
+    expression += btn.dataset.value;
+    display.value = expression;
 });
