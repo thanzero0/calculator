@@ -33,6 +33,9 @@ buttons.addEventListener("click", function (e) {
 
         angka1 = hasil.toString();
         angka2 = "";
+        operator = "";
         return;
+
+
     }
 })
