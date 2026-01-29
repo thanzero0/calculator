@@ -36,6 +36,16 @@ buttons.addEventListener("click", function (e) {
         operator = "";
         return;
 
+        if (value === "+" || value === "-" || value === "*" ||value === "/") {
+            if (operator !"" || display.value === "") return;
+
+            operator = value;
+            angka1 = display.value;
+            display.value = "";
+            return
+        }
+
+        
 
     }
 })
