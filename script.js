@@ -122,7 +122,9 @@ let focusedThemeIndex = -1;
 function toggleThemeMenu() {
     themeMenu.classList.toggle("active");
     if (themeMenu.classList.contains("active")) {
-        focusedThemeIndex = -1;
+        // Start focus from the currently active theme
+        const options = document.querySelectorAll('.theme-opt');
+        focusedThemeIndex = Array.from(options).findIndex(opt => opt.classList.contains('active'));
         updateThemeMenuFocus();
     }
 }
