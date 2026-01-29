@@ -17,5 +17,16 @@ buttons.addEventListener("click", function (e) {
         angka2 = "";
         operator = "";
         display.value = "";
+        return;
+    }
+
+    if (button.id === "equal") {
+        if (angka1 === "" || operator === "" || angka2 === "") return;
+
+        const hasil = hitung(
+            Number(angka1),
+            Number(angka2),
+            operator
+        );
     }
 })
