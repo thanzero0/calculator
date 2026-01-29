@@ -75,6 +75,36 @@ body.cyberpunk-theme {
     --shadow: 0 0 15px rgba(255, 0, 255, 0.5);
 }
 
+body.forest-theme {
+    --bg-color: #064e3b;
+    --calc-bg: #065f46;
+    --display-bg: #022c22;
+    --display-text: #6ee7b7;
+    --btn-bg: #064e3b;
+    --btn-hover: #059669;
+    --btn-text: #ecfdf5;
+    --clear-bg: #7f1d1d;
+    --clear-hover: #991b1b;
+    --equal-bg: #10b981;
+    --equal-hover: #34d399;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.ocean-theme {
+    --bg-color: #082f49;
+    --calc-bg: #0c4a6e;
+    --display-bg: #082f49;
+    --display-text: #7dd3fc;
+    --btn-bg: #075985;
+    --btn-hover: #0369a1;
+    --btn-text: #f0f9ff;
+    --clear-bg: #7c2d12;
+    --clear-hover: #9a3412;
+    --equal-bg: #0284c7;
+    --equal-hover: #0ea5e9;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
