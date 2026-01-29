@@ -56,6 +56,12 @@ buttons.addEventListener("click", function (e) {
     }
 });
 
+const themeMenu = document.getElementById("themeMenu");
+
+function toggleThemeMenu() {
+    themeMenu.classList.toggle("active");
+}
+
 function setTheme(theme) {
     document.body.className = '';
     if (theme !== 'dark') {
@@ -63,7 +69,7 @@ function setTheme(theme) {
     }
 
     // Update active button state
-    document.querySelectorAll('.theme-btn').forEach(btn => {
+    document.querySelectorAll('.theme-opt').forEach(btn => {
         btn.classList.remove('active');
         if (btn.innerText.toLowerCase() === theme) {
             btn.classList.add('active');
@@ -72,7 +78,15 @@ function setTheme(theme) {
 
     // Save preference
     localStorage.setItem('calculator-theme', theme);
+    themeMenu.classList.remove("active");
 }
+
+// Close menu when clicking outside
+document.addEventListener("click", (e) => {
+    if (!e.target.closest(".theme-fab-container")) {
+        themeMenu.classList.remove("active");
+    }
+});
 
 // Load saved theme
 const savedTheme = localStorage.getItem('calculator-theme') || 'dark';
