@@ -5,14 +5,8 @@ let angka1 = "";
 let angka2 = "";
 let operator = "";
 
-buttons.addEventListener("click", function (e) {
-    const button = e.target;
-
-    if (button.tagName !== "BUTTON") return;
-
-    const value = button.dataset.value;
-
-    if (button.id === "clear") {
+function handleInput(value, id) {
+    if (id === "clear" || value === "Escape" || value.toLowerCase() === "c") {
         angka1 = "";
         angka2 = "";
         operator = "";
@@ -20,7 +14,7 @@ buttons.addEventListener("click", function (e) {
         return;
     }
 
-    if (button.id === "equal") {
+    if (id === "equal" || value === "Enter" || value === "=") {
         if (angka1 === "" || operator === "" || angka2 === "") return;
 
         const hasil = hitung(
@@ -30,15 +24,31 @@ buttons.addEventListener("click", function (e) {
         );
 
         display.value = hasil;
-
         angka1 = hasil.toString();
         angka2 = "";
         operator = "";
         return;
     }
 
+    if (value === "Backspace") {
+        if (operator === "") {
+            angka1 = angka1.slice(0, -1);
+            display.value = angka1;
+        } else {
+            if (angka2 === "") {
+                operator = "";
+                display.value = angka1;
+            } else {
+                angka2 = angka2.slice(0, -1);
+                display.value = angka2;
+            }
+        }
+        return;
+    }
+
     if (value === "+" || value === "-" || value === "*" || value === "/") {
-        if (operator !== "" || display.value === "") return;
+        if (display.value === "" && angka1 === "") return;
+        if (operator !== "") return;
 
         operator = value;
         angka1 = display.value;
@@ -47,12 +57,33 @@ buttons.addEventListener("click", function (e) {
     }
 
     // ANGKA / TITIK
-    if (operator === "") {
-        angka1 += value;
-        display.value = angka1;
-    } else {
-        angka2 += value;
-        display.value = angka2;
+    if (!isNaN(value) || value === ".") {
+        if (operator === "") {
+            angka1 += value;
+            display.value = angka1;
+        } else {
+            angka2 += value;
+            display.value = angka2;
+        }
+    }
+}
+
+buttons.addEventListener("click", function (e) {
+    const button = e.target;
+    if (button.tagName !== "BUTTON") return;
+    handleInput(button.dataset.value || null, button.id);
+});
+
+window.addEventListener("keydown", function (e) {
+    const key = e.key;
+    if (
+        !isNaN(key) ||
+        key === "." ||
+        ["+", "-", "*", "/", "Enter", "=", "Backspace", "Escape"].includes(key) ||
+        key.toLowerCase() === "c"
+    ) {
+        if (key === "/") e.preventDefault(); // Prevent browser search
+        handleInput(key, null);
     }
 });
 
