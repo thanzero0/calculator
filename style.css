@@ -60,6 +60,21 @@ body.sunset-theme {
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
+body.cyberpunk-theme {
+    --bg-color: #0d0221;
+    --calc-bg: #1a083d;
+    --display-bg: #000;
+    --display-text: #0ff;
+    --btn-bg: #2b0b5a;
+    --btn-hover: #4d0e9a;
+    --btn-text: #f0f;
+    --clear-bg: #450a0a;
+    --clear-hover: #7f1d1d;
+    --equal-bg: #ff00ff;
+    --equal-hover: #ff66ff;
+    --shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Outfit', system-ui, -apple-system, sans-serif;
