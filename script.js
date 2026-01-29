@@ -116,30 +116,22 @@ function toggleScientific() {
     document.querySelector(".calculator").classList.toggle("scientific");
 }
 
-buttons.addEventListener("click", function (e) {
-    const button = e.target;
-    if (button.tagName !== "BUTTON") return;
-    handleInput(button.dataset.value || button.innerText, button.id);
-});
-
-window.addEventListener("keydown", function (e) {
-    const key = e.key;
-    const allowedKeys = [
-        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
-        "+", "-", "*", "/", "(", ")", "^",
-        "Enter", "=", "Backspace", "Escape"
-    ];
-
-    if (allowedKeys.includes(key)) {
-        if (key === "/" || key === "(" || key === ")") e.preventDefault();
-        handleInput(key === "^" ? "**" : key, null);
-    }
-});
-
 const themeMenu = document.getElementById("themeMenu");
+let focusedThemeIndex = -1;
 
 function toggleThemeMenu() {
     themeMenu.classList.toggle("active");
+    if (themeMenu.classList.contains("active")) {
+        focusedThemeIndex = -1;
+        updateThemeMenuFocus();
+    }
+}
+
+function updateThemeMenuFocus() {
+    const options = document.querySelectorAll('.theme-opt');
+    options.forEach((opt, index) => {
+        opt.classList.toggle('focus', index === focusedThemeIndex);
+    });
 }
 
 function setTheme(theme) {
@@ -157,7 +149,69 @@ function setTheme(theme) {
 
     localStorage.setItem('calculator-theme', theme);
     themeMenu.classList.remove("active");
+    focusedThemeIndex = -1;
 }
+
+window.addEventListener("keydown", function (e) {
+    const key = e.key;
+
+    // Theme Menu Navigation
+    if (themeMenu.classList.contains("active")) {
+        const options = document.querySelectorAll('.theme-opt');
+        if (key === "ArrowDown") {
+            e.preventDefault();
+            focusedThemeIndex = (focusedThemeIndex + 1) % options.length;
+            updateThemeMenuFocus();
+            return;
+        }
+        if (key === "ArrowUp") {
+            e.preventDefault();
+            focusedThemeIndex = (focusedThemeIndex - 1 + options.length) % options.length;
+            updateThemeMenuFocus();
+            return;
+        }
+        if (key === "Enter" && focusedThemeIndex !== -1) {
+            e.preventDefault();
+            options[focusedThemeIndex].click();
+            return;
+        }
+        if (key === "Escape") {
+            themeMenu.classList.remove("active");
+            return;
+        }
+    }
+
+    // Global Shortcuts
+    if (key.toLowerCase() === "t" && !e.ctrlKey && !e.altKey) {
+        toggleThemeMenu();
+        return;
+    }
+    if (key.toLowerCase() === "h" && !e.ctrlKey && !e.altKey) {
+        toggleHistory();
+        return;
+    }
+    if (key.toLowerCase() === "s" && !e.ctrlKey && !e.altKey) {
+        toggleScientific();
+        return;
+    }
+
+    const allowedKeys = [
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
+        "+", "-", "*", "/", "(", ")", "^",
+        "Enter", "=", "Backspace", "Escape"
+    ];
+
+    if (allowedKeys.includes(key)) {
+        if (key === "/" || key === "(" || key === ")") e.preventDefault();
+        handleInput(key === "^" ? "**" : key, null);
+    }
+});
+
+buttons.addEventListener("click", function (e) {
+    const button = e.target;
+    if (button.tagName !== "BUTTON") return;
+    handleInput(button.dataset.value || button.innerText, button.id);
+});
 
 document.addEventListener("click", (e) => {
     if (!e.target.closest(".theme-fab-container")) {
