@@ -6,12 +6,12 @@ let angka2 = "";
 let operator = "";
 
 buttons.addEventListener("click", function (e) {
-    const button = e.targer;
-
-    if (button = e.target) return;
-
+    const button = e.target;
+  
+    if (button.tagName !== "BUTTON") return;
+  
     const value = button.dataset.value;
-
+  
     if (button.id === "clear") {
         angka1 = "";
         angka2 = "";
@@ -19,44 +19,42 @@ buttons.addEventListener("click", function (e) {
         display.value = "";
         return;
     }
-
+  
     if (button.id === "equal") {
         if (angka1 === "" || operator === "" || angka2 === "") return;
-
+  
         const hasil = hitung(
             Number(angka1),
             Number(angka2),
             operator
         );
-
+  
         display.value = hasil;
-
+  
         angka1 = hasil.toString();
         angka2 = "";
         operator = "";
         return;
     }
-
-        if (value === "+" || value === "-" || value === "*" ||value === "/") {
-
-            if (operator !"" || display.value === "") return;
-
-            operator = value;
-            angka1 = display.value;
-            display.value = "";
-            return;
-        }
-
-        if (operator === "") {
-            angka += value;
-            display.value = angka1;
-        } else {
-            angka2 += value;
-            display.value = angka2;
-        }
-
+  
+    if (value === "+" || value === "-" || value === "*" || value === "/") {
+        if (operator !== "" || display.value === "") return;
+  
+        operator = value;
+        angka1 = display.value;
+        display.value = "";
+        return;
     }
-});
+  
+    // ANGKA / TITIK
+    if (operator === "") {
+        angka1 += value;
+        display.value = angka1;
+    } else {
+        angka2 += value;
+        display.value = angka2;
+    }
+  });
 
 function hitung(a, b, op) {
     if (op === "+") return a + b;
