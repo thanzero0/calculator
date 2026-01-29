@@ -235,3 +235,153 @@ button:active {
     background: var(--equal-bg);
     color: white;
 }
+
+/* Calculator Controls */
+.calc-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.ctrl-btn {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.3s;
+    color: var(--btn-text);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.ctrl-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Scientific Mode Grid */
+.scientific-grid {
+    display: none;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    grid-column: span 4;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calculator.scientific {
+    width: 450px;
+}
+
+.calculator.scientific .scientific-grid {
+    display: grid;
+}
+
+.scientific-grid button {
+    height: 48px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+/* History Panel */
+.history-panel {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: var(--calc-bg);
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    color: var(--btn-text);
+}
+
+.history-panel.active {
+    right: 0;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 12px;
+}
+
+.history-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.history-header button {
+    height: auto;
+    padding: 6px 14px;
+    font-size: 13px;
+    background: var(--clear-bg);
+    border-radius: 8px;
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-5px);
+}
+
+.history-expr {
+    font-size: 14px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    word-break: break-all;
+}
+
+.history-res {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--equal-bg);
+}
+
+/* Scrollbar Style */
+.history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+@media (max-width: 500px) {
+    .calculator.scientific {
+        width: 95vw;
+    }
+
+    .scientific-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

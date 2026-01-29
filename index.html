@@ -22,10 +22,38 @@
         </div>
     </div>
 
+    <!-- History Panel -->
+    <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+            <h3>History</h3>
+            <button onclick="clearHistory()">Clear</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+    </div>
+
     <div class="calculator">
-        <input type="text" id="display" readonly>
+        <div class="calc-controls">
+            <button class="ctrl-btn" onclick="toggleHistory()" title="History">H</button>
+            <button class="ctrl-btn" onclick="toggleScientific()" title="Scientific Mode">S</button>
+        </div>
+
+        <input type="text" id="display" readonly placeholder="0">
 
         <div class="buttons">
+            <!-- Scientific Buttons (visible in scientific mode) -->
+            <div class="scientific-grid">
+                <button data-value="sin">sin</button>
+                <button data-value="cos">cos</button>
+                <button data-value="tan">tan</button>
+                <button data-value="sqrt">√</button>
+                <button data-value="log">log</button>
+                <button data-value="ln">ln</button>
+                <button data-value="(">(</button>
+                <button data-value=")">)</button>
+                <button data-value="pow">x^y</button>
+                <button data-value="pi">π</button>
+            </div>
+
             <button data-value="7">7</button>
             <button data-value="8">8</button>
             <button data-value="9">9</button>
