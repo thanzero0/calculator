@@ -35,17 +35,36 @@ buttons.addEventListener("click", function (e) {
         angka2 = "";
         operator = "";
         return;
+    }
 
         if (value === "+" || value === "-" || value === "*" ||value === "/") {
+
             if (operator !"" || display.value === "") return;
 
             operator = value;
             angka1 = display.value;
             display.value = "";
-            return
+            return;
         }
 
-        
+        if (operator === "") {
+            angka += value;
+            display.value = angka1;
+        } else {
+            angka2 += value;
+            display.value = angka2;
+        }
 
     }
-})
+});
+
+function hitung(a, b, op) {
+    if (op === "+") return a + b;
+    if (op === "-") return a - b;
+    if (op === "*") return a * b;
+    if (op === "/") {
+        if (b === 0) return error;
+        return a /b;
+    }
+
+}
