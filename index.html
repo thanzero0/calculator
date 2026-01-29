@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>calculator</title>
 </head>
+
 <body>
+    <div class="theme-switcher">
+        <button class="theme-btn active" onclick="setTheme('dark')">Dark</button>
+        <button class="theme-btn" onclick="setTheme('light')">Light</button>
+        <button class="theme-btn" onclick="setTheme('neon')">Neon</button>
+    </div>
+
     <div class="calculator">
         <input type="text" id="display" readonly>
 
@@ -37,4 +45,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
