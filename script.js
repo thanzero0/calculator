@@ -185,13 +185,27 @@ function updateThemeMenuFocus() {
 
 function setTheme(theme) {
     document.body.className = '';
-    if (theme !== 'dark') {
-        document.body.classList.add(theme + '-theme');
+    const customPanel = document.getElementById("customThemePanel");
+
+    if (theme === 'custom') {
+        document.body.classList.add('custom-theme');
+        loadCustomTheme();
+        if (customPanel) customPanel.classList.add('active');
+    } else {
+        // Clear custom inline styles and panel
+        document.body.style = '';
+        if (theme !== 'dark') {
+            document.body.classList.add(theme + '-theme');
+        }
+        if (customPanel) customPanel.classList.remove('active');
     }
 
     document.querySelectorAll('.theme-opt').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.innerText.toLowerCase() === theme || (theme === 'cyberpunk' && btn.innerText.toLowerCase() === 'cyber')) {
+        const text = btn.innerText.toLowerCase();
+        if (text === theme || (theme === 'cyberpunk' && text === 'cyber')) {
+            btn.classList.add('active');
+        } else if (theme === 'custom' && btn.id === 'customThemeOpt') {
             btn.classList.add('active');
         }
     });
@@ -199,6 +213,63 @@ function setTheme(theme) {
     localStorage.setItem('calculator-theme', theme);
     themeMenu.classList.remove("active");
     focusedThemeIndex = -1;
+}
+
+function toggleCustomEditor() {
+    const panel = document.getElementById("customThemePanel");
+    panel.classList.toggle("active");
+}
+
+function applyCustomTheme() {
+    const colors = {
+        '--bg-color': document.getElementById('color-bg').value,
+        '--calc-bg': document.getElementById('color-calc').value,
+        '--display-bg': document.getElementById('color-display').value,
+        '--btn-bg': document.getElementById('color-btn').value,
+        '--equal-bg': document.getElementById('color-equal').value,
+        '--display-text': document.getElementById('color-text').value,
+        '--btn-text': document.getElementById('color-text').value
+    };
+
+    const root = document.body;
+    for (const [prop, val] of Object.entries(colors)) {
+        root.style.setProperty(prop, val);
+    }
+
+    // Update dependent colors
+    root.style.setProperty('--btn-hover', adjustColor(colors['--btn-bg'], 20));
+    root.style.setProperty('--equal-hover', adjustColor(colors['--equal-bg'], 20));
+
+    localStorage.setItem('calculator-custom-colors', JSON.stringify(colors));
+}
+
+function loadCustomTheme() {
+    const saved = localStorage.getItem('calculator-custom-colors');
+    if (saved) {
+        const colors = JSON.parse(saved);
+        const root = document.body;
+        for (const [prop, val] of Object.entries(colors)) {
+            root.style.setProperty(prop, val);
+
+            // Sync inputs
+            const inputId = `color-${prop.split('-')[1]}`;
+            const input = document.getElementById(inputId);
+            if (input) input.value = val;
+        }
+    }
+}
+
+function adjustColor(hex, amt) {
+    let usePound = false;
+    if (hex[0] == "#") { hex = hex.slice(1); usePound = true; }
+    let num = parseInt(hex, 16);
+    let r = (num >> 16) + amt;
+    if (r > 255) r = 255; else if (r < 0) r = 0;
+    let b = ((num >> 8) & 0x00FF) + amt;
+    if (b > 255) b = 255; else if (b < 0) b = 0;
+    let g = (num & 0x0000FF) + amt;
+    if (g > 255) g = 255; else if (g < 0) g = 0;
+    return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16).padStart(6, '0');
 }
 
 window.addEventListener("keydown", function (e) {
