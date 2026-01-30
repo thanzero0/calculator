@@ -32,26 +32,28 @@
                         <button class="theme-opt" onclick="setTheme('ocean')">Ocean</button>
                         <button class="theme-opt" id="customThemeOpt" onclick="setTheme('custom')">Custom</button>
                     </div>
-                </div>
-                <!-- Custom Theme Editor -->
-                <div class="custom-theme-panel" id="customThemePanel">
-                    <div class="custom-theme-header">
-                        <span>Editor Warna</span>
-                        <button onclick="toggleCustomEditor()">×</button>
-                    </div>
-                    <div class="custom-theme-body">
-                        <div class="color-row"><label>Background</label><input type="color" id="color-bg"
-                                oninput="applyCustomTheme()"></div>
-                        <div class="color-row"><label>Calculator</label><input type="color" id="color-calc"
-                                oninput="applyCustomTheme()"></div>
-                        <div class="color-row"><label>Display</label><input type="color" id="color-display"
-                                oninput="applyCustomTheme()"></div>
-                        <div class="color-row"><label>Buttons</label><input type="color" id="color-btn"
-                                oninput="applyCustomTheme()"></div>
-                        <div class="color-row"><label>Accent</label><input type="color" id="color-equal"
-                                oninput="applyCustomTheme()"></div>
-                        <div class="color-row"><label>Text</label><input type="color" id="color-text"
-                                oninput="applyCustomTheme()"></div>
+
+                    <!-- Custom Theme Editor (Moved inside container) -->
+                    <div class="custom-theme-panel" id="customThemePanel">
+                        <div class="custom-theme-header">
+                            <span>Editor Warna</span>
+                            <button onclick="toggleCustomEditor()">×</button>
+                        </div>
+                        <div class="custom-theme-body">
+                            <div class="color-row"><label>Background</label><input type="color" id="color-bg"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Calculator</label><input type="color" id="color-calc"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Display</label><input type="color" id="color-display"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Buttons</label><input type="color" id="color-btn"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Accent</label><input type="color" id="color-equal"
+                                    oninput="applyCustomTheme()"></div>
+                            <div class="color-row"><label>Text</label><input type="color" id="color-text"
+                                    oninput="applyCustomTheme()"></div>
+                            <button class="save-theme-btn" onclick="saveCustomTheme()">Save Theme</button>
+                        </div>
                     </div>
                 </div>
             </div>

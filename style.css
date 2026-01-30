@@ -457,21 +457,34 @@ button.active-kb {
 /* Custom Theme Editor Styles */
 .custom-theme-panel {
     position: absolute;
-    bottom: 80px;
-    left: 160px;
-    /* Offset from theme menu to avoid overlap */
+    bottom: 0;
+    right: calc(100% + 20px);
+    /* Position to the left of the theme button */
     background: var(--calc-bg);
-    border-radius: 20px;
-    padding: 16px;
+    border-radius: 28px;
+    /* Extra smooth corners */
+    padding: 24px;
     box-shadow: var(--shadow);
     display: none;
-    /* Hidden by default */
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     border: 2px solid rgba(255, 255, 255, 0.1);
-    width: 200px;
-    z-index: 1001;
-    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 240px;
+    z-index: 1002;
+    animation: fadeInCustom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(15px);
+}
+
+@keyframes fadeInCustom {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .custom-theme-panel.active {
@@ -532,13 +545,45 @@ button.active-kb {
 }
 
 .color-row input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     cursor: pointer;
     background: transparent;
     padding: 0;
-    border-radius: 4px;
+}
+
+.color-row input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+.color-row input[type="color"]::-webkit-color-swatch {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.save-theme-btn {
+    margin-top: 8px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--equal-bg);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.save-theme-btn:hover {
+    background: var(--equal-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.save-theme-btn:active {
+    transform: translateY(0);
 }
 
 /* Scrollbar Style */
