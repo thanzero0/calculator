@@ -305,38 +305,42 @@ button.active-kb {
 
 .theme-menu {
     position: absolute;
-    bottom: 70px;
-    left: 0;
+    bottom: calc(100% + 28px);
+    /* Increased distance for better clearance */
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
     background: var(--calc-bg);
     border-radius: 16px;
-    padding: 8px;
+    padding: 10px;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 150px;
+    z-index: 1000;
 }
 
 .theme-menu.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .theme-opt {
-    padding: 10px 20px;
-    border-radius: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
     background: transparent;
     color: var(--btn-text);
     border: none;
-    text-align: left;
+    text-align: center;
     white-space: nowrap;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
 }
 
