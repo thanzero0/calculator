@@ -127,15 +127,24 @@ function clearHistory() {
 
 // UI Toggles
 function toggleMainFab() {
-    document.getElementById("fabGroup").classList.toggle("active");
+    const group = document.getElementById("fabGroup");
+    const btn = document.querySelector(".main-fab");
+    group.classList.toggle("active");
+    btn.classList.toggle("status-active", group.classList.contains("active"));
 }
 
 function toggleHistory() {
-    document.getElementById("historyPanel").classList.toggle("active");
+    const panel = document.getElementById("historyPanel");
+    const btn = document.querySelector(".history-fab");
+    panel.classList.toggle("active");
+    btn.classList.toggle("status-active", panel.classList.contains("active"));
 }
 
 function toggleScientific() {
-    document.querySelector(".calculator").classList.toggle("scientific");
+    const calc = document.querySelector(".calculator");
+    const btn = document.querySelector(".scientific-fab");
+    calc.classList.toggle("scientific");
+    btn.classList.toggle("status-active", calc.classList.contains("scientific"));
 }
 
 const themeMenu = document.getElementById("themeMenu");
@@ -249,6 +258,7 @@ document.addEventListener("click", (e) => {
     }
     if (!e.target.closest("#fabGroup")) {
         document.getElementById("fabGroup").classList.remove("active");
+        document.querySelector(".main-fab").classList.remove("status-active");
     }
 });
 
