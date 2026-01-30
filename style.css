@@ -214,14 +214,19 @@ button.active-kb {
 
 .fab-options {
     position: absolute;
-    left: 70px;
+    left: 80px;
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 16px;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-20px);
+    transform: translateX(-15px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--calc-bg);
+    padding: 8px 16px;
+    border-radius: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow);
 }
 
 .fab-group.active .fab-options {

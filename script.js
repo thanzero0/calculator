@@ -140,9 +140,12 @@ function toggleMainFab() {
 }
 
 function updateFabFocus() {
-    const options = document.querySelectorAll('.fab-options .fab-btn');
-    options.forEach((opt, index) => {
-        opt.classList.toggle('focus', index === focusedFabIndex);
+    const options = Array.from(document.querySelectorAll('.fab-options .fab-btn'));
+    const mainFab = document.querySelector('.main-fab');
+    const allBtns = [mainFab, ...options];
+
+    allBtns.forEach((btn, index) => {
+        btn.classList.toggle('focus', index === focusedFabIndex);
     });
 }
 
@@ -235,27 +238,32 @@ window.addEventListener("keydown", function (e) {
 
     // Main FAB Menu Navigation
     if (fabGroup.classList.contains("active")) {
-        const options = document.querySelectorAll('.fab-options .fab-btn');
+        const options = Array.from(document.querySelectorAll('.fab-options .fab-btn'));
+        const mainFab = document.querySelector('.main-fab');
+        const allBtns = [mainFab, ...options]; // Include M as the first element
+
         if (key === "ArrowRight") {
             e.preventDefault();
-            focusedFabIndex = (focusedFabIndex + 1) % options.length;
+            focusedFabIndex = (focusedFabIndex + 1) % allBtns.length;
             updateFabFocus();
             return;
         }
         if (key === "ArrowLeft") {
             e.preventDefault();
-            focusedFabIndex = (focusedFabIndex - 1 + options.length) % options.length;
+            focusedFabIndex = (focusedFabIndex - 1 + allBtns.length) % allBtns.length;
             updateFabFocus();
             return;
         }
         if (key === "Enter" && focusedFabIndex !== -1) {
             e.preventDefault();
-            options[focusedFabIndex].click();
+            allBtns[focusedFabIndex].click();
             return;
         }
         if (key === "Escape") {
             fabGroup.classList.remove("active");
             document.querySelector(".main-fab").classList.remove("status-active");
+            focusedFabIndex = -1;
+            updateFabFocus();
             return;
         }
     }
