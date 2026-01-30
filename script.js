@@ -5,6 +5,21 @@ let currentExpression = "";
 let history = JSON.parse(localStorage.getItem('calculator-history')) || [];
 
 function handleInput(value, id) {
+    // Visual feedback for keyboard
+    if (id === null) {
+        const btn = Array.from(document.querySelectorAll('button')).find(b => {
+            const val = b.dataset.value;
+            return val === value ||
+                (value === "Enter" && val === "Enter") ||
+                (value === "=" && val === "Enter") ||
+                (value.toLowerCase() === "c" && val === "c");
+        });
+        if (btn) {
+            btn.classList.add('active-kb');
+            setTimeout(() => btn.classList.remove('active-kb'), 100);
+        }
+    }
+
     if (id === "clear" || value === "Escape" || value.toLowerCase() === "c") {
         currentExpression = "";
         display.value = "";
@@ -203,11 +218,13 @@ window.addEventListener("keydown", function (e) {
     const allowedKeys = [
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".",
         "+", "-", "*", "/", "(", ")", "^",
-        "Enter", "=", "Backspace", "Escape"
+        "Enter", "=", "Backspace", "Escape", "c", "C"
     ];
 
     if (allowedKeys.includes(key)) {
         if (key === "/" || key === "(" || key === ")") e.preventDefault();
+        // Prevent enter from clicking the last focused button
+        if (key === "Enter") e.preventDefault();
         handleInput(key === "^" ? "**" : key, null);
     }
 });
@@ -215,6 +232,10 @@ window.addEventListener("keydown", function (e) {
 buttons.addEventListener("click", function (e) {
     const button = e.target;
     if (button.tagName !== "BUTTON") return;
+
+    // Prevent button focus to fix Enter key double input
+    button.blur();
+
     handleInput(button.dataset.value || button.innerText, button.id);
 });
 
