@@ -126,6 +126,10 @@ function clearHistory() {
 }
 
 // UI Toggles
+function toggleMainFab() {
+    document.getElementById("fabGroup").classList.toggle("active");
+}
+
 function toggleHistory() {
     document.getElementById("historyPanel").classList.toggle("active");
 }
@@ -242,6 +246,9 @@ buttons.addEventListener("click", function (e) {
 document.addEventListener("click", (e) => {
     if (!e.target.closest(".theme-fab-container")) {
         themeMenu.classList.remove("active");
+    }
+    if (!e.target.closest("#fabGroup")) {
+        document.getElementById("fabGroup").classList.remove("active");
     }
 });
 

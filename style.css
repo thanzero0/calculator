@@ -202,9 +202,32 @@ button.active-kb {
     position: fixed;
     bottom: 30px;
     left: 30px;
-    display: flex;
-    gap: 12px;
     z-index: 100;
+}
+
+.fab-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fab-options {
+    position: absolute;
+    bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fab-group.active .fab-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .theme-fab-container {
