@@ -125,12 +125,25 @@ function clearHistory() {
     renderHistory();
 }
 
-// UI Toggles
+const fabGroup = document.getElementById("fabGroup");
+let focusedFabIndex = -1;
+
 function toggleMainFab() {
-    const group = document.getElementById("fabGroup");
     const btn = document.querySelector(".main-fab");
-    group.classList.toggle("active");
-    btn.classList.toggle("status-active", group.classList.contains("active"));
+    fabGroup.classList.toggle("active");
+    btn.classList.toggle("status-active", fabGroup.classList.contains("active"));
+
+    if (fabGroup.classList.contains("active")) {
+        focusedFabIndex = -1;
+        updateFabFocus();
+    }
+}
+
+function updateFabFocus() {
+    const options = document.querySelectorAll('.fab-options .fab-btn');
+    options.forEach((opt, index) => {
+        opt.classList.toggle('focus', index === focusedFabIndex);
+    });
 }
 
 function toggleHistory() {
@@ -215,17 +228,36 @@ window.addEventListener("keydown", function (e) {
     }
 
     // Global Shortcuts
-    if (key.toLowerCase() === "t" && !e.ctrlKey && !e.altKey) {
-        toggleThemeMenu();
+    if (key.toLowerCase() === "m" && !e.ctrlKey && !e.altKey) {
+        toggleMainFab();
         return;
     }
-    if (key.toLowerCase() === "h" && !e.ctrlKey && !e.altKey) {
-        toggleHistory();
-        return;
-    }
-    if (key.toLowerCase() === "s" && !e.ctrlKey && !e.altKey) {
-        toggleScientific();
-        return;
+
+    // Main FAB Menu Navigation
+    if (fabGroup.classList.contains("active")) {
+        const options = document.querySelectorAll('.fab-options .fab-btn');
+        if (key === "ArrowRight") {
+            e.preventDefault();
+            focusedFabIndex = (focusedFabIndex + 1) % options.length;
+            updateFabFocus();
+            return;
+        }
+        if (key === "ArrowLeft") {
+            e.preventDefault();
+            focusedFabIndex = (focusedFabIndex - 1 + options.length) % options.length;
+            updateFabFocus();
+            return;
+        }
+        if (key === "Enter" && focusedFabIndex !== -1) {
+            e.preventDefault();
+            options[focusedFabIndex].click();
+            return;
+        }
+        if (key === "Escape") {
+            fabGroup.classList.remove("active");
+            document.querySelector(".main-fab").classList.remove("status-active");
+            return;
+        }
     }
 
     const allowedKeys = [

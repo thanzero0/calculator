@@ -271,8 +271,8 @@ button.active-kb {
     left: -6px;
     right: -6px;
     bottom: -6px;
-    border: 3px solid #10b981;
-    /* Ring color */
+    border: 3px solid var(--equal-bg);
+    /* Ring color matches theme */
     border-radius: 50%;
     opacity: 0;
     transform: scale(0.85);
@@ -283,7 +283,14 @@ button.active-kb {
 .fab-btn.status-active::after {
     opacity: 1;
     transform: scale(1);
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 15px var(--equal-bg);
+}
+
+.fab-btn.focus {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px var(--equal-bg);
+    border-color: #fff;
+    outline: none;
 }
 
 .theme-menu {
