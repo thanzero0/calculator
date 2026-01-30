@@ -60,6 +60,9 @@ function calculateResult() {
         const result = eval(expressionToEval);
 
         if (result !== undefined && !isNaN(result)) {
+            if (!isFinite(result)) {
+                throw new Error("Division by zero");
+            }
             const historyItem = {
                 expr: currentExpression,
                 res: result
