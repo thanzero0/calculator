@@ -167,7 +167,12 @@ const themeMenu = document.getElementById("themeMenu");
 let focusedThemeIndex = -1;
 
 function toggleThemeMenu() {
+    const customPanel = document.getElementById("customThemePanel");
     themeMenu.classList.toggle("active");
+
+    // Always close custom panel when toggling theme menu for a fresh start
+    if (customPanel) customPanel.classList.remove("active");
+
     if (themeMenu.classList.contains("active")) {
         // Start focus from the currently active theme
         const options = document.querySelectorAll('.theme-opt');
@@ -183,21 +188,27 @@ function updateThemeMenuFocus() {
     });
 }
 
-function setTheme(theme) {
-    document.body.className = '';
+function setTheme(theme, isInitial = false) {
     const customPanel = document.getElementById("customThemePanel");
 
     if (theme === 'custom') {
+        document.body.className = '';
         document.body.classList.add('custom-theme');
         loadCustomTheme();
-        if (customPanel) customPanel.classList.add('active');
+        // Toggle editor only if it's not the initial load
+        if (customPanel && !isInitial) customPanel.classList.toggle('active');
     } else {
-        // Clear custom inline styles and panel
-        document.body.style = '';
+        document.body.className = '';
+        document.body.style = ''; // Clear custom styles
         if (theme !== 'dark') {
             document.body.classList.add(theme + '-theme');
         }
         if (customPanel) customPanel.classList.remove('active');
+        // Close menu for preset themes (unless it's initial load)
+        if (!isInitial) {
+            themeMenu.classList.remove("active");
+            focusedThemeIndex = -1;
+        }
     }
 
     document.querySelectorAll('.theme-opt').forEach(btn => {
@@ -211,8 +222,6 @@ function setTheme(theme) {
     });
 
     localStorage.setItem('calculator-theme', theme);
-    themeMenu.classList.remove("active");
-    focusedThemeIndex = -1;
 }
 
 function toggleCustomEditor() {
@@ -387,6 +396,8 @@ buttons.addEventListener("click", function (e) {
 document.addEventListener("click", (e) => {
     if (!e.target.closest(".theme-fab-container")) {
         themeMenu.classList.remove("active");
+        const customPanel = document.getElementById("customThemePanel");
+        if (customPanel) customPanel.classList.remove("active");
     }
     if (!e.target.closest("#fabGroup")) {
         document.getElementById("fabGroup").classList.remove("active");
@@ -396,5 +407,5 @@ document.addEventListener("click", (e) => {
 
 // Load saved theme and history
 const savedTheme = localStorage.getItem('calculator-theme') || 'dark';
-setTheme(savedTheme);
+setTheme(savedTheme, true);
 renderHistory();

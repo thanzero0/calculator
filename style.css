@@ -457,12 +457,12 @@ button.active-kb {
 /* Custom Theme Editor Styles */
 .custom-theme-panel {
     position: absolute;
-    bottom: 0;
-    right: calc(100% + 20px);
-    /* Position to the left of the theme button */
+    bottom: calc(100% + 28px);
+    /* Same level as theme-menu */
+    left: calc(50% + 85px);
+    /* Positioned to the right of the 150px wide theme-menu */
     background: var(--calc-bg);
-    border-radius: 28px;
-    /* Extra smooth corners */
+    border-radius: 24px;
     padding: 24px;
     box-shadow: var(--shadow);
     display: none;
