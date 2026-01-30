@@ -235,6 +235,7 @@ function applyCustomTheme() {
         '--calc-bg': document.getElementById('color-calc').value,
         '--display-bg': document.getElementById('color-display').value,
         '--btn-bg': document.getElementById('color-btn').value,
+        '--clear-bg': document.getElementById('color-clear').value,
         '--equal-bg': document.getElementById('color-equal').value,
         '--display-text': document.getElementById('color-text').value,
         '--btn-text': document.getElementById('color-text').value
@@ -248,6 +249,7 @@ function applyCustomTheme() {
     // Update dependent colors
     root.style.setProperty('--btn-hover', adjustColor(colors['--btn-bg'], 20));
     root.style.setProperty('--equal-hover', adjustColor(colors['--equal-bg'], 20));
+    root.style.setProperty('--clear-hover', adjustColor(colors['--clear-bg'], 20));
 }
 
 function saveCustomTheme() {
@@ -256,6 +258,7 @@ function saveCustomTheme() {
         '--calc-bg': document.getElementById('color-calc').value,
         '--display-bg': document.getElementById('color-display').value,
         '--btn-bg': document.getElementById('color-btn').value,
+        '--clear-bg': document.getElementById('color-clear').value,
         '--equal-bg': document.getElementById('color-equal').value,
         '--display-text': document.getElementById('color-text').value,
         '--btn-text': document.getElementById('color-text').value
